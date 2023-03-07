@@ -3,6 +3,12 @@ li{
     padding: 0.1em;
 }
 
+body{
+    background-image: url('assets/spaceBG_tilable.jpg');
+    background-position: center;
+    color: white;
+}
+
 #jokes ul{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -42,6 +48,7 @@ li{
     position: absolute;
     top: 30em;
     width: 100%;
+    border-color: white;
 }
 
 .target{
