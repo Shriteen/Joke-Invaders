@@ -67,15 +67,15 @@ function gameLoop(joker)
 
 function startGame()
 {
+    let startdiv=document.getElementById("start");
+    let gamediv=document.getElementById("game");
+    startdiv.style.display="none";
+    gamediv.style.display="block";
+
     stubForJokes();
     let joker = setInterval(stubForJokes, 3000);
     $('#typing-field').on('keyup', onInput);
-
     $('#score-field').text('0');
-    
     gameLoop(joker);
-    
-
 }
 
-startGame();
