@@ -125,14 +125,17 @@ body{
     }
 }
 
-#start-screen{
+#start-screen,
+#game-over-screen{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 90vh;
 }
 
-#start-button{
+#start-button,
+#restart-button {
     border: 3px solid #ffffff;
     color: #ffffff;
     background-color: transparent;
@@ -144,7 +147,8 @@ body{
     transition: background-color 200ms ;
 }
 
-#start-button:hover{
+#start-button:hover,
+#restart-button:hover {
     color: #000000;
     background-color: #ffffff;
 }
