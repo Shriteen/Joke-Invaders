@@ -1,7 +1,47 @@
-function stubForJokes()
+let jokePool=[];
+
+function fetchJokes()
+{
+    fetch("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single&amount=10")
+	.then((response)=> response.json())
+	.then((data)=>{	    
+	    for( j of data.jokes )
+	    {
+		let joke=j.joke;
+		
+		//replace problematic characters
+		joke= joke.replace('“','"');
+		joke= joke.replace('”','"');
+		joke= joke.replace("‘","'");
+		joke= joke.replace("’","'");
+		joke= joke.replace("ö","o");
+		
+		let arr = joke.split(/\s+/);
+		if(arr.length<=28)
+		    jokePool.push(joke);
+		
+	    }
+	});
+}
+
+function addJokesToBoard()
 {
     const joke = document.createElement('ul');
-    let arr = ["Nullam", "eu", "ante", "vel", "est", "convallis", "dignissim"];
+
+    if(jokePool.length==0)
+    {
+	//blocking call
+	fetchJokes();
+    }
+    if(jokePool.length<=3)
+    {
+	//fetch more asynchronously
+	setTimeout(fetchJokes, 10);
+    }
+
+    //jokepool is sure to have atleast one joke
+    let jokeText = jokePool.shift();
+    let arr = jokeText.split(/\s+/);
     for (i of arr) {
 	let temp = document.createElement('li');
 	temp.textContent = i;
@@ -64,15 +104,17 @@ function gameLoop(joker)
 
 function startGame()
 {
-    stubForJokes();
-    let joker = setInterval(stubForJokes, 3000);
+    $('#start-screen').hide();
+    $('#game').show();
+
+    
+    addJokesToBoard();
+    let joker = setInterval(addJokesToBoard, 10000);
     $('#typing-field').on('keyup', onInput);
-
     $('#score-field').text('0');
-    
     gameLoop(joker);
-    
-
 }
 
-startGame();
+$('#game').hide();
+$('#start-button').click(startGame);
+fetchJokes();

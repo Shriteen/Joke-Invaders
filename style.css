@@ -54,3 +54,27 @@ body{
 .target{
     color: red;
 }
+
+#start-screen{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+}
+
+#start-button{
+    border: 3px solid #ffffff;
+    color: #ffffff;
+    background-color: transparent;
+    padding: 0.75em;
+    border-radius: 15px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.5rem;
+    transition: background-color 200ms ;
+}
+
+#start-button:hover{
+    color: #000000;
+    background-color: #ffffff;
+}
