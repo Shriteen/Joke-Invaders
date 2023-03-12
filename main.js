@@ -83,7 +83,7 @@ function gameLoop(joker)
     let gameOverLine= document.querySelector('#game-over-line');
 
     $('#jokes ul:last-child > li:first-child').addClass('target');
-
+    $('#target-field').text($('.target').text());
     
     if(lastJoke.getBoundingClientRect().bottom  <
        gameOverLine.getBoundingClientRect().y)
