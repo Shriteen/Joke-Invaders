@@ -70,6 +70,13 @@ function onInput(e)
     }
 }
 
+function gameOver()
+{
+    $('#game-over-score-field').text($('#score-field').text());
+    $('#game').hide();
+    $('#game-over-screen').show();
+}
+
 function gameLoop(joker)
 {
     let lastJoke= document.querySelector('#jokes ul:last-child');
@@ -95,9 +102,8 @@ function gameLoop(joker)
     {
 	// GAME OVER
 	$('#typing-field').off('keyup');
-	clearInterval(joker);
-	
-	alert("Game over\n score:"+ $('#score-field').text());
+	clearInterval(joker);	
+	gameOver();
     }
 }
 
@@ -105,8 +111,10 @@ function gameLoop(joker)
 function startGame()
 {
     $('#start-screen').hide();
+    $('#game-over-screen').hide();
     $('#game').show();
-
+    $('#jokes').empty();
+    $('#typing-field').val('').focus();
     
     addJokesToBoard();
     let joker = setInterval(addJokesToBoard, 10000);
@@ -115,6 +123,14 @@ function startGame()
     gameLoop(joker);
 }
 
-$('#game').hide();
-$('#start-button').click(startGame);
+
+
 fetchJokes();
+
+$('#game').hide();
+$('#game-over-screen').hide();
+
+$('#start-button').click(startGame);
+$('#restart-button').click(startGame);
+
+
