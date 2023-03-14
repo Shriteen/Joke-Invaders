@@ -1,4 +1,8 @@
+const Shuffle = window.Shuffle;
+
 let jokePool=[];
+let shuffleInstanceArray=[];
+let shuffleInstanceOfJokes;
 
 function fetchJokes()
 {
@@ -26,6 +30,7 @@ function fetchJokes()
 
 function addJokesToBoard()
 {
+    
     const joke = document.createElement('ul');
 
     if(jokePool.length==0)
@@ -48,6 +53,17 @@ function addJokesToBoard()
 	joke.append(temp);
     }
     $('#jokes').prepend(joke);
+    $('#jokes>ul').addClass('joke');
+
+    shuffleInstanceArray.push(new Shuffle(joke,{
+	itemSelector: '#jokes li',
+	columnWidth: (containerWidth)=> containerWidth/7
+    }));
+
+    //code in gameloop should have been here
+    // shuffleInstanceOfJokes = new Shuffle(document.querySelector('#jokes'), {
+    // 	itemSelector: '.joke',
+    // });
 }
 
 function onInput(e)
@@ -58,10 +74,15 @@ function onInput(e)
 
 	if( $('.target').text() == str )
 	{
+	    shuffleInstanceArray[0].remove($('.target'));
 	    $('.target').remove();
+	    
 	    // when ul is empty
 	    if ($('#jokes ul:last-child').children().length == 0 )
+	    {
 		$('#jokes ul:last-child').remove();
+		shuffleInstanceArray.shift();
+	    }
 	    $('#typing-field').val('');
 
 	    let score=Number($('#score-field').text());
@@ -97,12 +118,25 @@ function gameLoop(joker)
     {
 	// continue game
 	setTimeout(() => gameLoop(joker), 100);
+
+	/* ============================================================
+	  The following joke should have been in addJokesToBoard
+	   function, but it gives a bug that the first joke is not
+	   visible after play again till second joke is loaded.
+	   Putting it here works. I believe since this function runs
+	   every 100ms it avoids some kind of race condition.
+	 */
+	delete shuffleInstanceOfJokes;
+	shuffleInstanceOfJokes = new Shuffle(document.querySelector('#jokes'), {
+	    itemSelector: '.joke',
+	});
+	// ============================================================
     }
     else
     {
 	// GAME OVER
 	$('#typing-field').off('keyup');
-	clearInterval(joker);	
+	clearInterval(joker);
 	gameOver();
     }
 }
@@ -114,6 +148,7 @@ function startGame()
     $('#game-over-screen').hide();
     $('#game').show();
     $('#jokes').empty();
+    shuffleInstanceArray=[];
     
     addJokesToBoard();
     let joker = setInterval(addJokesToBoard, 10000);
