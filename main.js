@@ -114,6 +114,7 @@ function startGame()
     $('#game-over-screen').hide();
     $('#game').show();
     $('#jokes').empty();
+    $('#typing-field').val('').focus();
     
     addJokesToBoard();
     let joker = setInterval(addJokesToBoard, 10000);
