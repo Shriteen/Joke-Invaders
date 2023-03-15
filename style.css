@@ -133,7 +133,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     height: 90vh;
 }
 
@@ -154,4 +154,14 @@ body{
 #restart-button:hover {
     color: #000000;
     background-color: #ffffff;
+}
+
+#lore{
+    max-width: 50em;
+    text-align: center;
+    border-radius: 1.5em 0.4em 1.5em 0.4em;
+    padding: 1em;
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 0 0 15px rgba(0,127,192,0.5);
+    backdrop-filter: blur(5px);
 }
