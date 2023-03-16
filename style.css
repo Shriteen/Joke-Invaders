@@ -7,11 +7,17 @@ input[type="text"]{
     appearance: none;
 }
 
+@font-face {
+    font-family: "jfont";
+    src: url(roboto-remix-font/Minecraftchmc-dBlX.ttf);
+}
+
 body{
     background-image: url('assets/spaceBG_tilable.jpg');
     background-position: center;
     color: white;
     font-weight: bold;
+    font-family: 'jfont';
 }
 
 #jokes ul{
@@ -19,7 +25,7 @@ body{
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     flex-wrap: wrap;
     padding: 0;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     text-align: center;
 }
 
@@ -52,6 +58,7 @@ body{
     padding: 7.5rem;
     padding-bottom: 0;
     font-weight: bold;
+    font-size: 1.2rem;
     text-shadow: 0 0 15px;
     
     background-image: url('assets/dashboard.png');
@@ -136,11 +143,12 @@ body{
     border: 3px solid #ffffff;
     color: #ffffff;
     background-color: transparent;
-    padding: 0.75em;
+    padding: 0.65em;
     border-radius: 15px;
     cursor: pointer;
     text-align: center;
-    font-size: 1.5rem;
+    font-family: 'jfont';
+    font-size: 2.2rem;
     transition: background-color 200ms ;
 }
 
