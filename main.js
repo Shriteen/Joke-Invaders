@@ -158,7 +158,7 @@ function gameLoop(joker)
     {
 	// GAME OVER
 	$('#typing-field').off('keyup');
-	clearInterval(joker);
+	clearInterval(joker);	
 	gameOver();
     }
 }
@@ -171,6 +171,7 @@ function startGame()
     $('#game').show();
     $('#jokes').empty();
     shuffleInstanceArray=[];
+    $('#typing-field').val('').focus();
     
     addJokesToBoard();
     let joker = setInterval(addJokesToBoard, 10000);
