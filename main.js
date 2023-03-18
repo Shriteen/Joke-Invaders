@@ -1,4 +1,8 @@
+const Shuffle = window.Shuffle;
+
 let jokePool=[];
+let shuffleInstanceArray=[];
+let shuffleInstanceOfJokes;
 
 function fetchJokes()
 {
@@ -21,17 +25,27 @@ function fetchJokes()
 		    jokePool.push(joke);
 		
 	    }
+	}).catch((err)=> {
+	    alert('There seems to be some error🙁\nTry checking your Internet connection and Refresh');
 	});
 }
 
 function addJokesToBoard()
 {
+    
     const joke = document.createElement('ul');
 
     if(jokePool.length==0)
     {
-	//blocking call
 	fetchJokes();
+	// we want to have blocking call.
+	
+	// when there is no joke, start fetching and then come back in
+	// 1 second, Even though we are returning and there is no
+	// value associated with function and it's any-ways called
+	// asynchronously, so no problem.
+	setTimeout(addJokesToBoard,1000);
+	return;
     }
     if(jokePool.length<=3)
     {
@@ -48,6 +62,22 @@ function addJokesToBoard()
 	joke.append(temp);
     }
     $('#jokes').prepend(joke);
+    $('#jokes>ul').addClass('joke');
+
+    try {
+	shuffleInstanceArray.push(new Shuffle(joke,{
+	    itemSelector: '#jokes li',
+	    columnWidth: (containerWidth)=> containerWidth/7
+	}));
+    }
+    catch(err)
+    {
+	alert('There seems to be some error🙁\nTry checking your Internet connection and Refresh');
+    }
+    //code in gameloop should have been here
+    // shuffleInstanceOfJokes = new Shuffle(document.querySelector('#jokes'), {
+    // 	itemSelector: '.joke',
+    // });
 }
 
 function onInput(e)
@@ -58,10 +88,15 @@ function onInput(e)
 
 	if( $('.target').text() == str )
 	{
+	    shuffleInstanceArray[0].remove($('.target'));
 	    $('.target').remove();
+	    
 	    // when ul is empty
 	    if ($('#jokes ul:last-child').children().length == 0 )
+	    {
 		$('#jokes ul:last-child').remove();
+		shuffleInstanceArray.shift();
+	    }
 	    $('#typing-field').val('');
 
 	    let score=Number($('#score-field').text());
@@ -97,6 +132,27 @@ function gameLoop(joker)
     {
 	// continue game
 	setTimeout(() => gameLoop(joker), 100);
+
+	/* ============================================================
+	  The following joke should have been in addJokesToBoard
+	   function, but it gives a bug that the first joke is not
+	   visible after play again till second joke is loaded.
+	   Putting it here works. I believe since this function runs
+	   every 100ms it avoids some kind of race condition.
+	 */
+	delete shuffleInstanceOfJokes;
+
+	try {
+	    shuffleInstanceOfJokes = new Shuffle(document.querySelector('#jokes'), {
+		itemSelector: '.joke',
+	    });   
+	}
+	catch (err)
+	{
+	    alert('There seems to be some error🙁\nTry checking your Internet connection and Refresh');
+	}
+	
+	// ============================================================
     }
     else
     {
@@ -114,6 +170,7 @@ function startGame()
     $('#game-over-screen').hide();
     $('#game').show();
     $('#jokes').empty();
+    shuffleInstanceArray=[];
     $('#typing-field').val('').focus();
     
     addJokesToBoard();
