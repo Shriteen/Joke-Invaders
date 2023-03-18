@@ -10,6 +10,7 @@ input[type="text"]{
 @font-face {
     font-family: "jfont";
     src: url("assets/roboto-remix-font/Minecraftchmc-dBlX.ttf");
+    size-adjust: 150%;
 }
 
 body{
@@ -153,7 +154,7 @@ body{
     cursor: pointer;
     text-align: center;
     font-family: 'jfont'; 
-    font-size: 2rem;
+    font-size: 1.5rem;
     transition: background-color 200ms ;
 }
 
