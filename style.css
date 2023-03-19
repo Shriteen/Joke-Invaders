@@ -1,3 +1,26 @@
+@font-face {
+    font-family: "jfont";
+    src: url("assets/roboto-remix-font/Minecraftchmc-dBlX.ttf");
+    size-adjust: 150%;
+}
+
+@font-face {
+    font-family: "digital";
+    src: url("assets/digital-font/DigitalNormal-xO6j.otf");
+}
+
+@font-face {
+    font-family: "moonhouse";
+    src: url("assets/moonhouse-font/Moonhouse-yE5M.ttf");
+}
+
+@font-face {
+    font-family: "text-me-one";
+    src: url("assets/text-me-one/TextMeOne-yZa3.ttf");
+    size-adjust: 120%;
+}
+
+
 li{
     list-style-type: none;
     padding: 0.1em;
@@ -7,18 +30,28 @@ input[type="text"]{
     appearance: none;
 }
 
-@font-face {
-    font-family: "jfont";
-    src: url("assets/roboto-remix-font/Minecraftchmc-dBlX.ttf");
-    size-adjust: 150%;
-}
-
 body{
     background-image: url('assets/spaceBG_tilable.jpg');
     background-position: center;
     color: white;
     font-weight: bold;
-    font-family: 'jfont';
+}
+
+#game{
+    font-family: 'text-me-one';
+}
+
+#title-banner{
+    font-family: 'moonhouse';
+    font-size: 5.5em;
+    text-align: center;
+    margin: 1rem;
+}
+
+@media screen and (max-width:500px){
+    #title-banner{
+	font-size: 3.5em;
+    }
 }
 
 #jokes ul{
@@ -107,6 +140,8 @@ body{
     top: 5%;
     left: 10%;
     color: cyan;
+    font-family: 'digital';
+    font-size: 1.3em;
 }
 
 #target-field{
@@ -133,6 +168,19 @@ body{
     #target-field{
 	top: 2%;
     }
+}
+
+#game-over-screen{
+    font-family: 'digital';
+}
+
+#game-over-text{
+    font-size: 5em;
+    margin: 1rem;
+}
+
+#game-over-display-score{
+    font-size: 2.5em;
 }
 
 #start-screen,
@@ -172,4 +220,5 @@ body{
     background-color: rgba(255,255,255,0.2);
     box-shadow: 0 0 15px rgba(0,127,192,0.5);
     backdrop-filter: blur(5px);
+    font-family: 'jfont';
 }
