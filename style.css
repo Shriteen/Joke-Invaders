@@ -173,3 +173,20 @@ body{
     box-shadow: 0 0 15px rgba(0,127,192,0.5);
     backdrop-filter: blur(5px);
 }
+
+#playPauseBtn{
+    position:absolute;
+    top:5%;
+    left:93%;
+    margin:0 auto;
+    border-radius: 5%;
+    background-color: rgb(173, 173, 203);
+    color: white;
+    border: none;
+    background-color:transparent;
+    display:black;
+}
+img {
+    width: 22px;
+    opacity:0.7;
+  }
