@@ -98,30 +98,25 @@ function onInput(e)
 		shuffleInstanceArray.shift();
 	    }
 	    $('#typing-field').val('');
-		audioRightInput.play();
+	    correctSound.play();
 
 	    let score=Number($('#score-field').text());
 	    $('#score-field').text(String(score+1));
-	}else{
-		audioWrongInput.play();
+	}
+	else
+	{
+	    wrongSound.play();
 	}
     }
 }
 
-let MusicBit=0;  //MusicBit is On, it is used to find whether MUSIC was On or Off before Game Over
 function gameOver()
 {
     $('#game-over-score-field').text($('#score-field').text());
     $('#game').hide();
     $('#game-over-screen').show();
-	audioGameOver.play();
-	if (audioPlayer.paused){
-      MusicBit=1;
-	}
-	else{
-		MusicBit=0;
-	}
-	audioPlayer.pause();
+
+    gameOverSound.play();
 }
 
 function gameLoop(joker)
@@ -184,34 +179,31 @@ function startGame()
     $('#jokes').empty();
     shuffleInstanceArray=[];
     $('#typing-field').val('').focus();
-    
+
+    if($('#playPauseBtn.on').length)
+	audioPlayer.play();
+
     addJokesToBoard();
     let joker = setInterval(addJokesToBoard, 10000);
     $('#typing-field').on('keyup', onInput);
     $('#score-field').text('0');
     gameLoop(joker);
-
-	if (audioPlayer.paused | MusicBit==1){
-        audioPlayer.pause();
-      }else{
-        audioPlayer.load();
-        audioPlayer.play();
-      }
 }
 
-function restartMusicSwitch()
+function toggleMusic()
 {
-	if (MusicBit==0){
-		audioPlayer.play();
-	}else{
-		audioPlayer.pause();}
-	startScreen();
+    if (audioPlayer.paused) {
+	audioPlayer.play();
+	playPauseBtn.alt = "Pause";	
+	$('#playPauseBtn').removeClass('off').addClass('on');
+    }
+    else
+    {
+	audioPlayer.pause();
+	playPauseBtn.alt = "Play";
+	$('#playPauseBtn').removeClass('on').addClass('off');
+    }
 }
-
-function startScreen(){
-	$('#start-screen').show();
-}
-
 
 fetchJokes();
 
@@ -219,22 +211,17 @@ $('#game').hide();
 $('#game-over-screen').hide();
 
 $('#start-button').click(startGame);
-$('#restart-button').click(restartMusicSwitch);
+$('#restart-button').click(startGame);
+
+$('#playPauseBtn').click(toggleMusic);
+
+const correctSound= document.querySelector('#audioRightInput');
+const wrongSound= document.querySelector('#audioWrongInput');
+const gameOverSound= document.querySelector('#audioGameOver');
 
 //Audio On/Off
 const audioPlayer = document.getElementById('audioPlayer');
 const playPauseBtn = document.getElementById('playPauseBtn');
 
-playPauseBtn.addEventListener('click', function() {
-    if (audioPlayer.paused) {
-      audioPlayer.play();
-      playPauseImg.src = "assets/filled-voice-on.png";
-      playPauseImg.alt = "Pause";    
-    } else {
-      audioPlayer.pause();
-      playPauseImg.src = "assets/filled-voice-off.png";
-      playPauseImg.alt = "Play";
-        
-    }
- });
+
     

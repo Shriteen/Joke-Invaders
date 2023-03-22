@@ -176,17 +176,20 @@ body{
 
 #playPauseBtn{
     position:absolute;
-    top:5%;
-    left:93%;
-    margin:0 auto;
-    border-radius: 5%;
-    background-color: rgb(173, 173, 203);
+    bottom: 1vw;
+    left: 1vw;
     color: white;
     border: none;
     background-color:transparent;
-    display:black;
+    width: 3em;
+    height: 3em;
+    background-size: contain;
 }
-img {
-    width: 22px;
-    opacity:0.7;
-  }
+
+#playPauseBtn.on{
+    background-image: url('assets/filled-voice-on.png');
+}
+
+#playPauseBtn.off{
+    background-image: url('assets/filled-voice-off.png');
+}
