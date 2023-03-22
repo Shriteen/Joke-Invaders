@@ -4,6 +4,18 @@ let jokePool=[];
 let shuffleInstanceArray=[];
 let shuffleInstanceOfJokes;
 
+const correctSound= document.querySelector('#audioRightInput');
+const wrongSound= document.querySelector('#audioWrongInput');
+const gameOverSound= document.querySelector('#audioGameOver');
+
+//Audio On/Off
+const audioPlayer = document.getElementById('audioPlayer');
+const playPauseBtn = document.getElementById('playPauseBtn');
+
+let musicTracks= ['Kevin MacLeod - Dungeon Boss.opus',
+		  'Kevin MacLeod - Itty Bitty.m4a',
+		  'Kevin MacLeod - Pixelland.m4a'];
+
 function fetchJokes()
 {
     fetch("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single&amount=10")
@@ -208,7 +220,14 @@ function toggleMusic()
 	$('#typing-field').focus();
 }
 
+function changeTrack()
+{
+    let track = 'assets/music/' + musicTracks[Math.floor(Math.random()*musicTracks.length)];
+    audioPlayer.src=track;
+}
+
 fetchJokes();
+changeTrack();
 
 $('#game').hide();
 $('#game-over-screen').hide();
@@ -218,13 +237,6 @@ $('#restart-button').click(startGame);
 
 $('#playPauseBtn').click(toggleMusic);
 
-const correctSound= document.querySelector('#audioRightInput');
-const wrongSound= document.querySelector('#audioWrongInput');
-const gameOverSound= document.querySelector('#audioGameOver');
-
-//Audio On/Off
-const audioPlayer = document.getElementById('audioPlayer');
-const playPauseBtn = document.getElementById('playPauseBtn');
-
+document.querySelector('#audioPlayer').addEventListener('ended', changeTrack);
 
     
