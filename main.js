@@ -203,6 +203,9 @@ function toggleMusic()
 	playPauseBtn.alt = "Play";
 	$('#playPauseBtn').removeClass('on').addClass('off');
     }
+
+    if($('#typing-field').is(":visible"))
+	$('#typing-field').focus();
 }
 
 fetchJokes();
