@@ -110,6 +110,7 @@ function onInput(e)
 		shuffleInstanceArray.shift();
 	    }
 	    $('#typing-field').val('');
+		correctSound.load();
 	    correctSound.play();
 
 	    let score=Number($('#score-field').text());
