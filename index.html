@@ -24,6 +24,15 @@
 	P.S.: Be serious because I AIN'T JOKING AROUND!
       </p>
       <button id="start-button">Start Game</button>
+
+      <div id="difficulty-selector">
+	<select id="difficulty-level">
+          <option value="E" default>Difficulty: Easy</option>
+	  <option value="M">Difficulty: Medium</option>
+	  <option value="H">Difficulty: Hard</option>
+	</select>
+	<label for="difficulty-level">🞃</label>
+      </div>
     </div>
     <div id="game">
       <div id="playfield">
@@ -40,7 +49,7 @@
     <div id="game-over-screen">
       <h1 id="game-over-text">Game Over</h1>
       <h2 id="game-over-display-score">Score: <span id="game-over-score-field"></span></h2>
-      <button id="restart-button">Play again</button>      
+      <button id="restart-button">Play again</button>
     </div>
     
     <audio id="audioPlayer" src="" autoplay></audio>
@@ -48,5 +57,7 @@
     <button id="soundEffectBtn" class="on"></button>    
     <audio id="audioGameOver" src="assets/music/game-over-arcade.mp3" ></audio>
     <audio id="audioWrongInput" src="assets/music/wrong-input.wav"></audio>
+
+    
   </body>
 </html>
