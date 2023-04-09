@@ -236,14 +236,22 @@ function changeTrack()
     audioPlayer.src=track;
 }
 
+function startScreen()
+{
+    $('#game').hide();
+    $('#game-over-screen').hide();
+    $('#start-screen').show();
+}
+
 fetchJokes();
 changeTrack();
 
-$('#game').hide();
-$('#game-over-screen').hide();
+startScreen()
 
 $('#start-button').click(startGame);
 $('#restart-button').click(startGame);
+$('#start-screen-button').click(startScreen);
+
 
 $('#playPauseBtn').click(toggleMusic);
 $('#soundEffectBtn').click(toggleSound);

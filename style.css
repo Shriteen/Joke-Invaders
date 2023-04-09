@@ -197,7 +197,8 @@ body{
 }
 
 #start-button,
-#restart-button {
+#restart-button,
+#start-screen-button{
     border: 3px solid #ffffff;
     color: #ffffff;
     background-color: transparent;
@@ -211,7 +212,8 @@ body{
 }
 
 #start-button:hover,
-#restart-button:hover {
+#restart-button:hover,
+#start-screen-button:hover{
     color: #000000;
     background-color: #ffffff;
 }
