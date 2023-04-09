@@ -17,6 +17,8 @@ let musicTracks= ['Kevin MacLeod - Dungeon Boss.opus',
 		  'Kevin MacLeod - Itty Bitty.m4a',
 		  'Kevin MacLeod - Pixelland.m4a'];
 
+let difficultyTimeInterval=18000;
+
 function fetchJokes()
 {
     fetch("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single&amount=10")
@@ -198,7 +200,7 @@ function startGame()
 	audioPlayer.play();
 
     addJokesToBoard();
-    let joker = setInterval(addJokesToBoard, 10000);
+    let joker = setInterval(addJokesToBoard, difficultyTimeInterval);
     $('#typing-field').on('keyup', onInput);
     $('#score-field').text('0');
     gameLoop(joker);
@@ -242,6 +244,28 @@ function startScreen()
     $('#game-over-screen').hide();
     $('#start-screen').show();
 }
+
+function updateDifficulty()
+{
+    let difficulty=$('#difficulty-level').val();
+    switch(difficulty)
+    {
+	case "E":
+	difficultyTimeInterval=18000;
+	break;
+
+	case "M":
+	difficultyTimeInterval=12000;
+	break;
+
+	case "H":
+	difficultyTimeInterval=8000;
+	break;
+    }
+}
+
+updateDifficulty();
+$('#difficulty-level').change(updateDifficulty);
 
 fetchJokes();
 changeTrack();

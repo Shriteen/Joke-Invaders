@@ -266,3 +266,17 @@ body{
     background-image: url('assets/music-off.png');
 }
 
+#difficulty-selector{
+    position:absolute;
+    bottom: 1vw;
+    right: 1vw;
+}
+
+#difficulty-level{
+    appearance: none;
+    color: white;
+    border: none;
+    background-color:transparent;
+    font-weight: bold;
+    font-size: 1rem;
+}
