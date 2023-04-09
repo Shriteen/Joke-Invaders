@@ -4,7 +4,6 @@ let jokePool=[];
 let shuffleInstanceArray=[];
 let shuffleInstanceOfJokes;
 
-const correctSound= document.querySelector('#audioRightInput');
 const wrongSound= document.querySelector('#audioWrongInput');
 const gameOverSound= document.querySelector('#audioGameOver');
 
@@ -110,8 +109,6 @@ function onInput(e)
 		shuffleInstanceArray.shift();
 	    }
 	    $('#typing-field').val('');
-		correctSound.load();
-	    correctSound.play();
 
 	    let score=Number($('#score-field').text());
 	    $('#score-field').text(String(score+1));
