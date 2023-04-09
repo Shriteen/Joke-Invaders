@@ -7,9 +7,11 @@ let shuffleInstanceOfJokes;
 const wrongSound= document.querySelector('#audioWrongInput');
 const gameOverSound= document.querySelector('#audioGameOver');
 
-//Audio On/Off
+//Music On/Off
 const audioPlayer = document.getElementById('audioPlayer');
 const playPauseBtn = document.getElementById('playPauseBtn');
+//Sound effects on off
+const soundEffectSwitch = document.getElementById('soundEffectBtn');
 
 let musicTracks= ['Kevin MacLeod - Dungeon Boss.opus',
 		  'Kevin MacLeod - Itty Bitty.m4a',
@@ -115,7 +117,8 @@ function onInput(e)
 	}
 	else
 	{
-	    wrongSound.play();
+	    if($('#soundEffectBtn.on').length)	    
+		wrongSound.play();
 	}
     }
 }
@@ -126,7 +129,8 @@ function gameOver()
     $('#game').hide();
     $('#game-over-screen').show();
 
-    gameOverSound.play();
+    if($('#soundEffectBtn.on').length)
+	gameOverSound.play();
 }
 
 function gameLoop(joker)
@@ -218,6 +222,14 @@ function toggleMusic()
 	$('#typing-field').focus();
 }
 
+function toggleSound()
+{
+    $('#soundEffectBtn').toggleClass('on').toggleClass('off');
+
+    if($('#typing-field').is(":visible"))
+	$('#typing-field').focus();
+}
+
 function changeTrack()
 {
     let track = 'assets/music/' + musicTracks[Math.floor(Math.random()*musicTracks.length)];
@@ -234,6 +246,7 @@ $('#start-button').click(startGame);
 $('#restart-button').click(startGame);
 
 $('#playPauseBtn').click(toggleMusic);
+$('#soundEffectBtn').click(toggleSound);
 
 document.querySelector('#audioPlayer').addEventListener('ended', changeTrack);
 
