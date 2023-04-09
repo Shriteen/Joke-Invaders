@@ -238,6 +238,13 @@ function changeTrack()
     audioPlayer.src=track;
 }
 
+function startScreen()
+{
+    $('#game').hide();
+    $('#game-over-screen').hide();
+    $('#start-screen').show();
+}
+
 function updateDifficulty()
 {
     let difficulty=$('#difficulty-level').val();
@@ -263,11 +270,12 @@ $('#difficulty-level').change(updateDifficulty);
 fetchJokes();
 changeTrack();
 
-$('#game').hide();
-$('#game-over-screen').hide();
+startScreen()
 
 $('#start-button').click(startGame);
 $('#restart-button').click(startGame);
+$('#start-screen-button').click(startScreen);
+
 
 $('#playPauseBtn').click(toggleMusic);
 $('#soundEffectBtn').click(toggleSound);
