@@ -226,3 +226,41 @@ body{
     backdrop-filter: blur(5px);
     font-family: 'jfont';
 }
+
+#playPauseBtn,
+#soundEffectBtn{
+    position:absolute;
+    color: white;
+    border: none;
+    background-color:transparent;
+    width: 3em;
+    height: 3em;
+    background-size: cover;
+}
+
+#playPauseBtn{
+    bottom: 1vw;
+    left: 1vw;    
+}
+
+#soundEffectBtn{
+    bottom: 1vw;
+    left: calc(1vw + 50px);    
+}
+
+#soundEffectBtn.on{
+    background-image: url('assets/filled-voice-on.png');
+}
+
+#soundEffectBtn.off{
+    background-image: url('assets/filled-voice-off.png');
+}
+
+#playPauseBtn.on{
+    background-image: url('assets/music-on.png');
+}
+
+#playPauseBtn.off{
+    background-image: url('assets/music-off.png');
+}
+

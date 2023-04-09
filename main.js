@@ -4,6 +4,19 @@ let jokePool=[];
 let shuffleInstanceArray=[];
 let shuffleInstanceOfJokes;
 
+const wrongSound= document.querySelector('#audioWrongInput');
+const gameOverSound= document.querySelector('#audioGameOver');
+
+//Music On/Off
+const audioPlayer = document.getElementById('audioPlayer');
+const playPauseBtn = document.getElementById('playPauseBtn');
+//Sound effects on off
+const soundEffectSwitch = document.getElementById('soundEffectBtn');
+
+let musicTracks= ['Kevin MacLeod - Dungeon Boss.opus',
+		  'Kevin MacLeod - Itty Bitty.m4a',
+		  'Kevin MacLeod - Pixelland.m4a'];
+
 function fetchJokes()
 {
     fetch("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single&amount=10")
@@ -102,6 +115,11 @@ function onInput(e)
 	    let score=Number($('#score-field').text());
 	    $('#score-field').text(String(score+1));
 	}
+	else
+	{
+	    if($('#soundEffectBtn.on').length)	    
+		wrongSound.play();
+	}
     }
 }
 
@@ -110,6 +128,9 @@ function gameOver()
     $('#game-over-score-field').text($('#score-field').text());
     $('#game').hide();
     $('#game-over-screen').show();
+
+    if($('#soundEffectBtn.on').length)
+	gameOverSound.play();
 }
 
 function gameLoop(joker)
@@ -172,7 +193,10 @@ function startGame()
     $('#jokes').empty();
     shuffleInstanceArray=[];
     $('#typing-field').val('').focus();
-    
+
+    if($('#playPauseBtn.on').length)
+	audioPlayer.play();
+
     addJokesToBoard();
     let joker = setInterval(addJokesToBoard, 10000);
     $('#typing-field').on('keyup', onInput);
@@ -180,9 +204,40 @@ function startGame()
     gameLoop(joker);
 }
 
+function toggleMusic()
+{
+    if (audioPlayer.paused) {
+	audioPlayer.play();
+	playPauseBtn.alt = "Pause";	
+	$('#playPauseBtn').removeClass('off').addClass('on');
+    }
+    else
+    {
+	audioPlayer.pause();
+	playPauseBtn.alt = "Play";
+	$('#playPauseBtn').removeClass('on').addClass('off');
+    }
 
+    if($('#typing-field').is(":visible"))
+	$('#typing-field').focus();
+}
+
+function toggleSound()
+{
+    $('#soundEffectBtn').toggleClass('on').toggleClass('off');
+
+    if($('#typing-field').is(":visible"))
+	$('#typing-field').focus();
+}
+
+function changeTrack()
+{
+    let track = 'assets/music/' + musicTracks[Math.floor(Math.random()*musicTracks.length)];
+    audioPlayer.src=track;
+}
 
 fetchJokes();
+changeTrack();
 
 $('#game').hide();
 $('#game-over-screen').hide();
@@ -190,4 +245,9 @@ $('#game-over-screen').hide();
 $('#start-button').click(startGame);
 $('#restart-button').click(startGame);
 
+$('#playPauseBtn').click(toggleMusic);
+$('#soundEffectBtn').click(toggleSound);
 
+document.querySelector('#audioPlayer').addEventListener('ended', changeTrack);
+
+    
